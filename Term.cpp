@@ -21,6 +21,7 @@ void Term::operator =(const Term &rhs)
 ostream& operator<<(ostream& os, const Term& t)
 {
 	os << t.coefficient << "X^" << t.exponent;
+	return os;
 }
 
 Term operator +(const Term&lhs, const Term&rhs)
