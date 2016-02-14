@@ -41,12 +41,39 @@ Assumptions:
 
 #include <iostream>
 #include <string> 
+#include "Term.h"
 
 using namespace std;
 
 int main()
 {
+	//Added in some quick tests to make sure that Term.h and Term.cpp work as expected...
+	//All functions work, feel free to delete whenever
 
+	Term a(1, 4);
+	Term b(2, 3);
+	Term c(3, 2);
+	Term d(4, 2);
 
+	//Greater than check
+	cout << "Expected: 1\tActual: " << (a > b) << endl;
+	cout << "Expected: 0\tActual: " << (b > a) << endl;
+	cout << "Expected: 0\tActual: " << (c > d) << endl;
+
+	//Less than check
+	cout << "Expected: 0\tActual: " << (a < b) << endl;
+	cout << "Expected: 1\tActual: " << (b < a) << endl;
+	cout << "Expected: 0\tActual: " << (c < d) << endl;
+
+	//Equal to check
+	cout << "Expected: 0\tActual: " << (a == b) << endl;
+	cout << "Expected: 1\tActual: " << (c == d) << endl;
+
+	//I assume >= and <= work if the above three work.
+
+	//Addition check
+	cout << "Expected: 7X^2\tActual: " << (c+d) << endl;
+
+	system("pause");
 	return 0;
 }
