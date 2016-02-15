@@ -47,18 +47,16 @@ Assumptions:
 using namespace std;
 
 void displayMenu();
-Polynomial getPolynomial(Polynomial p);
+//Polynomial getPolynomial(Polynomial p);
 void clearScreen();
 
 int main()
 {
-	displayMenu();
 
 	system("pause");
-	return 0;
 }
 
-void displayMenu()
+/*void displayMenu()
 {
 	Polynomial p1, p2, result;
 	int userSelection(-1);
@@ -111,9 +109,9 @@ Polynomial getPolynomial(Polynomial p)
 {
 	cin >> p;
 	return p;
-}
+}*/
 
 void clearScreen()
 {
-
+	cout << string(100, '\n');
 }
