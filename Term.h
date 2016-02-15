@@ -33,6 +33,7 @@ public:
 private:
 	int coefficient;
 	int exponent;
+	int tempInt;
 };
 
 #endif
