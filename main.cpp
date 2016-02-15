@@ -100,7 +100,9 @@ void displayMenu()
 		cout << "Polynomial two is " << p2 << endl;
 		break;
 	case 6:
-		p1 = p2 = result = Polynomial();
+		p1.clear();
+		p2.clear();
+		result.clear();
 		cout << "Entries cleared\n\n";
 		break;
 	case 7:
