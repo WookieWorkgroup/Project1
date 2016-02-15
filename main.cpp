@@ -52,8 +52,10 @@ void clearScreen();
 
 int main()
 {
-
-	system("pause");
+	while (true)
+	{
+		displayMenu();
+	}
 }
 
 void displayMenu()
@@ -66,7 +68,8 @@ void displayMenu()
 	cout << "3:\tAdd Polynomials\n";
 	cout << "4:\tDisplay Polynomial One\n";
 	cout << "5:\tDisplay Polynomial Two\n";
-	cout << "6:\tClear entries\n\n";
+	cout << "6:\tClear entries\n";
+	cout << "7:\tExit\n\n";
 	cin >> userSelection;
 	
 	switch (userSelection)
@@ -100,6 +103,8 @@ void displayMenu()
 		p1 = p2 = result = Polynomial();
 		cout << "Entries cleared\n\n";
 		break;
+	case 7:
+		exit(0);
 	default:
 		cout << "Invalid menu option\n\n";
 	}
