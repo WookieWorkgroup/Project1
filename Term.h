@@ -30,6 +30,7 @@ public:
 	bool operator < (Term &rhs);
 	bool operator <= (Term &rhs);
 	bool operator == (Term &rhs);
+	bool ispositive()const;
 private:
 	int coefficient;
 	int exponent;

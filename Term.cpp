@@ -109,3 +109,12 @@ bool Term::operator == (Term &rhs)
 {
 	return exponent == rhs.exponent;
 }
+
+bool Term::ispositive()const
+{
+	if (coefficient>0)
+		return true;
+	else
+		return false;
+	return false;
+}

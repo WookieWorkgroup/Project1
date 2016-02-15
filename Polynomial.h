@@ -4,14 +4,15 @@
 #include"Term.h"
 using namespace std;
 
-class polynomial
+class Polynomial
 {
 public:
-	polynomial();
-	friend polynomial operator +(const polynomial&lhs, const polynomial&rhs);
-	friend ostream& operator<<(ostream& os, const polynomial& t);
-	friend istream& operator>>(istream& is, polynomial& t);
+	Polynomial();
+	void sort();
+	friend Polynomial operator +(Polynomial& lhs, Polynomial& rhs);
+	friend ostream& operator<<(ostream& os, const Polynomial& P);
+	friend istream& operator>>(istream& is, Polynomial& P);
 	
 private:
 	list<Term> terms;
-}
+};
