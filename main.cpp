@@ -42,12 +42,12 @@ Assumptions:
 #include <iostream>
 #include <string> 
 #include "Term.h"
-//#include "Polynomial.h"
+#include "Polynomial.h"
 
 using namespace std;
 
 void displayMenu();
-//Polynomial getPolynomial(Polynomial p);
+Polynomial getPolynomial(Polynomial p);
 void clearScreen();
 
 int main()
@@ -56,7 +56,7 @@ int main()
 	system("pause");
 }
 
-/*void displayMenu()
+void displayMenu()
 {
 	Polynomial p1, p2, result;
 	int userSelection(-1);
@@ -109,7 +109,7 @@ Polynomial getPolynomial(Polynomial p)
 {
 	cin >> p;
 	return p;
-}*/
+}
 
 void clearScreen()
 {
