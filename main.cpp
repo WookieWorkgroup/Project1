@@ -109,7 +109,8 @@ void displayMenu()
 
 Polynomial getPolynomial(Polynomial p)
 {
-
+	cin >> p;
+	return p;
 }
 
 void clearScreen()
