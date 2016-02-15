@@ -45,7 +45,7 @@ istream& operator>>(istream& is, Term& t)
 	else
 	{
 		//loop until we hit the x
-		while (c != 'X' && c != 'x')
+		while (c != 'X')
 		{
 			ss << c;
 			c = is.get();
