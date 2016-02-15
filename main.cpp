@@ -85,8 +85,8 @@ void displayMenu()
 		cout << endl << endl;
 		break;
 	case 3:
-		if (p1 is empty) cout << "Polynomial One is empty, please enter a value before you add\n";
-		if (p2 is empty) cout << "Polynomial Two is empty, please enter a value before you add\n";
+		if (p1.is_empty()) cout << "Polynomial One is empty, please enter a value before you add\n";
+		if (p2.is_empty()) cout << "Polynomial Two is empty, please enter a value before you add\n";
 		else
 		{
 			result = p1 + p2;
