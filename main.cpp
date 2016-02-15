@@ -42,13 +42,77 @@ Assumptions:
 #include <iostream>
 #include <string> 
 #include "Term.h"
+//#include "Polynomial.h"
 
 using namespace std;
 
+void displayMenu();
+Polynomial getPolynomial(Polynomial p);
+void clearScreen();
+
 int main()
 {
-
+	displayMenu();
 
 	system("pause");
 	return 0;
+}
+
+void displayMenu()
+{
+	Polynomial p1, p2, result;
+	int userSelection(-1);
+	cout << "Please select one: \n\n";
+	cout << "1:\tEnter Polynomial One\n";
+	cout << "2:\tEnter Polynomial Two\n";
+	cout << "3:\tAdd Polynomials\n";
+	cout << "4:\tDisplay Polynomial One\n";
+	cout << "5:\tDisplay Polynomial Two\n";
+	cout << "6:\tClear entries\n\n";
+	cin >> userSelection;
+	
+	switch (userSelection)
+	{
+	case 1:
+		cout << "Enter the first polynomial: ";
+		getPolynomial(p1);
+		cout << endl << endl;
+		break;
+	case 2:
+		cout << "Enter the second polynomial: ";
+		getPolynomial(p2);
+		cout << endl << endl;
+		break;
+	case 3:
+		if (p1 is empty) cout << "Polynomial One is empty, please enter a value before you add\n";
+		if (p2 is empty) cout << "Polynomial Two is empty, please enter a value before you add\n";
+		else
+		{
+			result = p1 + p2;
+			cout << "The result is: " << result << endl;
+		}
+		break;
+	case 4:
+		cout << "Polynomial one is " << p1 << endl;
+		break;
+	case 5:
+		cout << "Polynomial two is " << p2 << endl;
+		break;
+	case 6:
+		p1 = p2 = result = Polynomial();
+		cout << "Entries cleared\n\n";
+		break;
+	default:
+		cout << "Invalid menu option\n\n";
+	}
+}
+
+Polynomial getPolynomial(Polynomial p)
+{
+
+}
+
+void clearScreen()
+{
+
 }
