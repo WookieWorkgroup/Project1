@@ -170,19 +170,19 @@ Term operator +(const Term&lhs, const Term&rhs)
 
 bool Term::operator > (Term &rhs)
 {
-	return exponent > rhs.exponent;
+	return exponent < rhs.exponent;
 }
 bool Term::operator >= (Term &rhs)
 {
-	return exponent >= rhs.exponent;
+	return exponent <= rhs.exponent;
 }
 bool Term::operator < (Term &rhs)
 {
-	return exponent < rhs.exponent;
+	return exponent > rhs.exponent;
 }
 bool Term::operator <= (Term &rhs)
 {
-	return exponent <= rhs.exponent;
+	return exponent >= rhs.exponent;
 }
 bool Term::operator == (Term &rhs)
 {

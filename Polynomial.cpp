@@ -13,7 +13,7 @@ Polynomial::Polynomial()
 
 
 // Sort polynomial and combine terms
-void Polynomial::sort()
+/*void Polynomial::sort()
 {
 	list<Term>::iterator head = terms.begin();
 	while (head != terms.end())
@@ -27,7 +27,7 @@ void Polynomial::sort()
 		swap(smallest, *head);
 		++head;
 	}
-}
+}*/
 
 
 // Clear the polynomial
@@ -48,7 +48,7 @@ bool Polynomial::is_empty()
 void Polynomial::addTerm(Term t)
 {
 	terms.push_back(t);
-	sort();
+	terms.sort();
 }
 
 
@@ -127,7 +127,7 @@ istream& operator>>(istream& is, Polynomial& P)
 
 	P.terms.push_front(temp);
 
-	P.sort();
+	P.terms.sort();
 	return is;
 }
 
