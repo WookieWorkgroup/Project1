@@ -1,13 +1,14 @@
 #include"Polynomial.h"
+#include <sstream>
 
 Polynomial::Polynomial()
 {
-	Term temp;
+	/*Term temp;
 	while (cin >> temp)
 	{
-		terms.push_back(temp);
+	terms.push_back(temp);
 	}
-	sort();
+	sort();*/
 }
 
 void Polynomial::sort()
@@ -34,6 +35,12 @@ void Polynomial::clear()
 bool Polynomial::is_empty()
 {
 	return(terms.empty());
+}
+
+void Polynomial::addTerm(Term t)
+{
+	terms.push_back(t);
+	sort();
 }
 
 Polynomial operator +(Polynomial& lhs, Polynomial& rhs)
@@ -87,10 +94,11 @@ ostream& operator<<(ostream& os, const Polynomial& P)
 istream& operator>>(istream& is, Polynomial& P)
 {
 	Term temp;
-	while (cin >> temp)
-	{
-		P.terms.push_back(temp);
-	}
+	cin >> temp;
+	cout << temp;
+
+	P.terms.push_front(temp);
+
 	P.sort();
 	return is;
 }

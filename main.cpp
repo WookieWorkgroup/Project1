@@ -94,10 +94,12 @@ void displayMenu()
 		}
 		break;
 	case 4:
-		cout << "Polynomial one is " << p1 << endl;
+		if (p1.is_empty()) cout << "Polynomial One is empty, please enter a value before you add\n";
+		else cout << "Polynomial one is " << p1 << endl;
 		break;
 	case 5:
-		cout << "Polynomial two is " << p2 << endl;
+		if (p2.is_empty()) cout << "Polynomial Two is empty, please enter a value before you add\n";
+		else cout << "Polynomial two is " << p2 << endl;
 		break;
 	case 6:
 		p1.clear();
@@ -111,14 +113,34 @@ void displayMenu()
 		cout << "Invalid menu option\n\n";
 	}
 }
-
 Polynomial getPolynomial(Polynomial p)
 {
-	cin >> p;
+	string s;
+	Term temp;
+	string line;
+
+	list<Term> terms;
+	list<string> strings;
+	cin.ignore();
+	getline(cin, line);
+	if (line.find('-') != string::npos)line.insert(line.find('-'), 1, '+');
+	size_t prev(0), pos;
+	while ((pos = line.find_first_of("+", prev)) != string::npos)
+	{
+		if (pos > prev)strings.push_back(line.substr(prev, pos - prev));
+		prev = pos + 1;
+	}
+	if (prev < line.length())strings.push_back(line.substr(prev, std::string::npos));
+
+	for (std::list<std::string>::const_iterator i = strings.begin(); i != strings.end(); ++i)
+	{
+		Term t(*i);
+		p.addTerm(t);
+	}
 	return p;
 }
-
 void clearScreen()
 {
 	cout << string(100, '\n');
 }
+
