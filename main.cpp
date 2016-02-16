@@ -1,7 +1,5 @@
 /*********************************************
 
-
-
 Name:			Joshua Neustrom, jwnf7b@mail.umkc.edu, 10227835
 
 Course:			CS303
@@ -12,31 +10,6 @@ Description:	Polynomial Tool
 Inputs:			User given polynomial
 Outputs:		Result of polynomial adddition sorted by exponet with terms simplified
 
-Error Handling:
-1)
-
-Algorithm:
-1) User interface
-2) Option 1 - Ask for polynomial
-- Parse
-- Sort
-- Combine terms
-- Store as double linked list
-3) Option 2 - Display last polynomail
-4) Option 3 - Enter new polynomial (repeat option 1 process
-5) Option 4 - Add polynomials
-- Sort result
-- Store Result
-6) Option 5 - Display Result
-7) Option 6 - Exit
-8) Done and Done
-
-Assumptions:
-1) Only x variables used
-2) No history stored past the last polynomial
-3) Polynomials are sorted and simplified
-4) Wookies rule
-
 *********************************************/
 
 #include <iostream>
@@ -46,21 +19,29 @@ Assumptions:
 
 using namespace std;
 
+// Functions for the menu
 void displayMenu();
-Polynomial getPolynomial(Polynomial p);
 void clearScreen();
+
+// Gets user input and turns it into a polynomial
+Polynomial getPolynomial(Polynomial p);
+
 
 int main()
 {
+	// Continious display of menu
 	while (true)
 	{
 		displayMenu();
 	}
 }
 
+// A glorious menu and user interface
 void displayMenu()
 {
 	Polynomial p1, p2, result;
+
+	// My choices
 	int userSelection(-1);
 	cout << "Please select one: \n\n";
 	cout << "1:\tEnter Polynomial One\n";
@@ -72,18 +53,24 @@ void displayMenu()
 	cout << "7:\tExit\n\n";
 	cin >> userSelection;
 	
+	// What happens when making a choice
 	switch (userSelection)
 	{
+	// Give me poly1
 	case 1:
 		cout << "Enter the first polynomial: ";
 		getPolynomial(p1);
 		cout << endl << endl;
 		break;
+
+	// Give me poly2
 	case 2:
 		cout << "Enter the second polynomial: ";
 		getPolynomial(p2);
 		cout << endl << endl;
 		break;
+	
+	// Add the polys
 	case 3:
 		if (p1.is_empty()) cout << "Polynomial One is empty, please enter a value before you add\n";
 		if (p2.is_empty()) cout << "Polynomial Two is empty, please enter a value before you add\n";
@@ -93,32 +80,85 @@ void displayMenu()
 			cout << "The result is: " << result << endl;
 		}
 		break;
+
+	// Show what user entered for poly1
 	case 4:
-		cout << "Polynomial one is " << p1 << endl;
+		if (p1.is_empty()) cout << "Polynomial One is empty, please enter a value before you add\n";
+		else cout << "Polynomial one is " << p1 << endl;
 		break;
+
+	// Show what user entered for poly2
 	case 5:
-		cout << "Polynomial two is " << p2 << endl;
+		if (p2.is_empty()) cout << "Polynomial Two is empty, please enter a value before you add\n";
+		else cout << "Polynomial two is " << p2 << endl;
 		break;
+
+	// Reset all polys
 	case 6:
 		p1.clear();
 		p2.clear();
 		result.clear();
 		cout << "Entries cleared\n\n";
 		break;
+
+	// Bah bye
 	case 7:
 		exit(0);
+
+	// Bad choice, try that again
 	default:
 		cout << "Invalid menu option\n\n";
 	}
 }
 
+
+// Gets user input and turns it into a polynomail
 Polynomial getPolynomial(Polynomial p)
 {
-	cin >> p;
+	// Temp term to put into a list
+	Term temp;
+
+	// Line of input poly from user 
+	string line;
+
+	// Lists of terms and strings to build a poly
+	list<Term> terms;
+	list<string> strings;
+
+	// User input
+	cin.ignore();
+	getline(cin, line);
+
+	// Put + in front of any - as a delimeter for terms in a poly
+	if (line.find('-') != string::npos)line.insert(line.find('-'), 1, '+');
+
+	// Position markers
+	size_t prev(0), pos;
+
+	// Break up the user input into substrings with + as the delimeter of terms
+	while ((pos = line.find_first_of("+", prev)) != string::npos)
+	{
+		if (pos > prev)strings.push_back(line.substr(prev, pos - prev));
+		prev = pos + 1;
+	}
+
+	// Take care of the end of the line
+	if (prev < line.length())strings.push_back(line.substr(prev, std::string::npos));
+
+	// Put the list of substrings into terms then into a poly
+	for (std::list<std::string>::const_iterator i = strings.begin(); i != strings.end(); ++i)
+	{
+		Term t(*i);
+		p.addTerm(t);
+	}
+
+	// Return the poly
 	return p;
 }
 
+// Clear what the user sees on the screen
 void clearScreen()
 {
 	cout << string(100, '\n');
 }
+

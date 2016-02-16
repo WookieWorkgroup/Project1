@@ -12,6 +12,7 @@ public:
 	//Constructors
 	Term(int c = 0, int e = 0);
 	Term(const Term &rhs);
+	Term(string s);
 	
 	//Getters & Setters
 	int getCoefficient() { return coefficient; }
@@ -19,6 +20,9 @@ public:
 
 	void setCoefficient(int c){ coefficient = c; }
 	void setExponent(int e){ exponent = e; }
+
+	// Is it positive
+	bool ispositive()const;
 
 	//Overloaded operators
 	void operator =(const Term &rhs);
@@ -30,7 +34,9 @@ public:
 	bool operator < (Term &rhs);
 	bool operator <= (Term &rhs);
 	bool operator == (Term &rhs);
+
 private:
+	// Varialbes for power and coef of a term
 	int coefficient;
 	int exponent;
 };
