@@ -20,26 +20,28 @@ Outputs:		Result of polynomial adddition sorted by exponet with terms simplified
 using namespace std;
 
 // Functions for the menu
-void displayMenu();
+void displayMenu(Polynomial& p1, Polynomial& p2, Polynomial& result);
 void clearScreen();
 
 // Gets user input and turns it into a polynomial
-Polynomial getPolynomial(Polynomial p);
+Polynomial getPolynomial(Polynomial& p);
 
 
 int main()
 {
+	Polynomial p1, p2, result;
+
 	// Continious display of menu
 	while (true)
 	{
-		displayMenu();
+		displayMenu(p1, p2, result);
 	}
 }
 
 // A glorious menu and user interface
-void displayMenu()
+void displayMenu(Polynomial& p1, Polynomial& p2, Polynomial& result)
 {
-	Polynomial p1, p2, result;
+	
 
 	// My choices
 	int userSelection(-1);
@@ -113,14 +115,14 @@ void displayMenu()
 
 
 // Gets user input and turns it into a polynomail
-Polynomial getPolynomial(Polynomial p)
+Polynomial getPolynomial(Polynomial& p)
 {
 	// Temp term to put into a list
 	Term temp;
 
 	// Line of input poly from user 
 	string line;
-
+	string s;
 	// Lists of terms and strings to build a poly
 	list<Term> terms;
 	list<string> strings;

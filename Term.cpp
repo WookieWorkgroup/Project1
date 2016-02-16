@@ -1,26 +1,36 @@
 #include "Term.h"
 
+// Default constructor
 Term::Term(int c, int e)
 {
 	coefficient = c;
 	exponent = e;
 }
 
+
+// Copy Constructor
 Term::Term(const Term &rhs)
 {
 	coefficient = rhs.coefficient;
 	exponent = rhs.exponent;
 }
 
+
+// Take a string and extract coef and exponet
 Term::Term(string s)
 {
-
+	// Variable for neg or pos term
 	int negMult(1);
+
+	// String variables for reading user entered string
 	stringstream ss;
 	char c;
 	string::size_type sz;
 
+	// Remove the + symbol
 	if (s[0] == '+')s.erase(0,1);
+
+	// If find -, remove and make term coef negative
 	else if (s[0] == '-')
 	{
 		s.erase(0, 1);
@@ -28,19 +38,31 @@ Term::Term(string s)
 	}
 
 	c = s[0];
-	while (c != 'X')
+
+	// Remove the X
+	while (c != 'X' && s != "")
 	{
 		c = s[0];
 		ss << c;
 		s.erase(0, 1);
+
+		// We know exponet is at least 1
+		exponent = 1;
 	}
 
+	// Set the coef
 	coefficient = negMult * stoi(ss.str(), &sz);
 
+	// Reset string stream
 	ss.str("");
-	s.erase(0, 1);
 	c = s[0];
 
+	// Erase the ^
+	if (c == '^')
+		s.erase(0, 1);
+	c = s[0];
+
+	// look for additional - or + with exponet
 	if(!(s.find('-') == string::npos && s.find('+') == string::npos))
 	{
 		while (c != '+' && c != '-' && c != '\n')
@@ -50,8 +72,21 @@ Term::Term(string s)
 			s.erase(0, 1);
 		}
 	}
-	else ss.str(s);
-	exponent = stoi(ss.str(), &sz);
+
+	// Set exponet if something is left in the string
+	else if (s != "")
+	{
+		ss.str(s);
+		exponent = stoi(ss.str(), &sz);
+	}
+
+	// No exp so set as zero
+	else if (exponent != 1)
+		exponent = 0;
+
+		
+	
+
 }
 
 void Term::operator =(const Term &rhs)
@@ -62,7 +97,12 @@ void Term::operator =(const Term &rhs)
 
 ostream& operator<<(ostream& os, const Term& t)
 {
-	os << t.coefficient << "X^" << t.exponent;
+	if (t.exponent > 1)
+		os << t.coefficient << "X^" << t.exponent;
+	else if (t.exponent == 1)
+		os << t.coefficient << "X";
+	else
+		os << t.coefficient;
 	return os;
 }
 istream& operator>>(istream& is, Term& t)
@@ -71,7 +111,7 @@ istream& operator>>(istream& is, Term& t)
 	stringstream ss;
 	
 	char c = is.get();
-	int val;
+
 
 	if (c == '-')
 	{
