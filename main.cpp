@@ -117,6 +117,8 @@ void displayMenu(Polynomial& p1, Polynomial& p2, Polynomial& result)
 // Gets user input and turns it into a polynomail
 Polynomial getPolynomial(Polynomial& p)
 {
+	p.clear();
+	
 	// Temp term to put into a list
 	Term temp;
 

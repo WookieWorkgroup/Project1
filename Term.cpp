@@ -42,12 +42,14 @@ Term::Term(string s)
 	// Remove the X
 	while (c != 'X' && s != "")
 	{
+		
 		c = s[0];
+		// We know exponet is at least 1
+		if (c == 'X' || c == 'x')
+			exponent = 1;
 		ss << c;
 		s.erase(0, 1);
-
-		// We know exponet is at least 1
-		exponent = 1;
+		
 	}
 
 	// Set the coef
