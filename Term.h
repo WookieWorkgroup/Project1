@@ -12,6 +12,7 @@ public:
 	//Constructors
 	Term(int c = 0, int e = 0);
 	Term(const Term &rhs);
+	Term(string s);
 	
 	//Getters & Setters
 	int getCoefficient() { return coefficient; }

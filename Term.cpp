@@ -12,6 +12,48 @@ Term::Term(const Term &rhs)
 	exponent = rhs.exponent;
 }
 
+Term::Term(string s)
+{
+
+	int negMult(1);
+	stringstream ss;
+	char c;
+	string::size_type sz;
+
+	if (s[0] == '+')s.erase(0,1);
+	else if (s[0] == '-')
+	{
+		s.erase(0, 1);
+		negMult = -1;
+	}
+
+	c = s[0];
+	while (c != 'X')
+	{
+		c = s[0];
+		ss << c;
+		s.erase(0, 1);
+	}
+
+	coefficient = negMult * stoi(ss.str(), &sz);
+
+	ss.str("");
+	s.erase(0, 1);
+	c = s[0];
+
+	if(!(s.find('-') == string::npos && s.find('+') == string::npos))
+	{
+		while (c != '+' && c != '-' && c != '\n')
+		{
+			c = s[0];
+			ss << c;
+			s.erase(0, 1);
+		}
+	}
+	else ss.str(s);
+	exponent = stoi(ss.str(), &sz);
+}
+
 void Term::operator =(const Term &rhs)
 {
 	coefficient = rhs.coefficient;
@@ -23,7 +65,6 @@ ostream& operator<<(ostream& os, const Term& t)
 	os << t.coefficient << "X^" << t.exponent;
 	return os;
 }
-
 istream& operator>>(istream& is, Term& t)
 {
 	int negMult(1), coeff(0), exp(0);
@@ -89,22 +130,18 @@ bool Term::operator > (Term &rhs)
 {
 	return exponent > rhs.exponent;
 }
-
 bool Term::operator >= (Term &rhs)
 {
 	return exponent >= rhs.exponent;
 }
-
 bool Term::operator < (Term &rhs)
 {
 	return exponent < rhs.exponent;
 }
-
 bool Term::operator <= (Term &rhs)
 {
 	return exponent <= rhs.exponent;
 }
-
 bool Term::operator == (Term &rhs)
 {
 	return exponent == rhs.exponent;
