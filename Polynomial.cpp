@@ -94,10 +94,8 @@ ostream& operator<<(ostream& os, const Polynomial& P)
 	++itr;
 	while (itr != P.terms.end())
 	{
-		if (itr->ispositive())
-			os << '+' << *itr;
-		else if (!(itr->ispositive()))
-			os << "-" << *itr;
+		if (itr->ispositive()) os << "+";
+		os << *itr;
 		++itr;
 	}
 	return os;
