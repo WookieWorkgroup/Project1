@@ -138,7 +138,7 @@ Polynomial getPolynomial(Polynomial& p)
 
 	// Line of input poly from user 
 	string line;
-	string s;
+
 	// Lists of terms and strings to build a poly
 	list<Term> terms;
 	list<string> strings;
@@ -148,7 +148,12 @@ Polynomial getPolynomial(Polynomial& p)
 	getline(cin, line);
 
 	// Put + in front of any - as a delimeter for terms in a poly
-	if (line.find('-') != string::npos)line.insert(line.find('-'), 1, '+');
+	int stringSearchPosition(0);
+	while (line.find('-', stringSearchPosition) != string::npos)
+	{
+		line.insert(line.find('-', stringSearchPosition), 1, '+');
+		stringSearchPosition = line.find('-', stringSearchPosition) + 1;
+	}
 
 	// Position markers
 	size_t prev(0), pos;
