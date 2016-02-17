@@ -51,7 +51,12 @@ Polynomial operator +(Polynomial& lhs, Polynomial& rhs)
 		
 		// Add terms of same exponet
 		if (*itr1 == *itr2)
+		{
 			sum.terms.push_back(*itr1 + *itr2);
+			++itr1;
+			++itr2;
+		}
+			
 
 		// If exponet in lhs term is greater, add term to list
 		else if (*itr1 > *itr2)
@@ -81,7 +86,11 @@ Polynomial operator +(Polynomial& lhs, Polynomial& rhs)
 		sum.terms.push_back(*itr2);
 		++itr2;
 	}
+
+	// Sort the result
 	sum.terms.sort();
+
+	// Bye
 	return sum;
 }
 
@@ -92,26 +101,34 @@ ostream& operator<<(ostream& os, const Polynomial& P)
 	list<Term>::const_iterator itr = P.terms.begin();
 	os << *itr;
 	++itr;
+
+	// Go through terms
 	while (itr != P.terms.end())
 	{
 		if (itr->ispositive()) os << "+";
 		os << *itr;
 		++itr;
 	}
+
+	// Bye
 	return os;
 }
 
 
-// Read in a poly for one term
+// Read in a term
 istream& operator>>(istream& is, Polynomial& P)
 {
 	Term temp;
 	cin >> temp;
 	cout << temp;
 
+	// Put term into the list
 	P.terms.push_front(temp);
 
+	// Sort list again
 	P.terms.sort();
+
+	// Bye
 	return is;
 }
 

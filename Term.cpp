@@ -37,29 +37,49 @@ Term::Term(string s)
 
 	c = s[0];
 
-	// Put the coef into the string streams
-	while (c != 'X' && isdigit(c) && s != "")
-	{
+	// When no number coef before X
+	
 		
-		c = s[0];
-		// We know exponent is at least 1
-		if (c == 'X' || c == 'x')
-			exponent = 1;
-		ss << c;
-		s.erase(0, 1);
-	}
+	
+		// Put the coef into the string streams
+		while (c != 'X' && s != "")
+		{
 
-	//Set the coefficient
-	coefficient = negMult * stoi(ss.str(), &sz);
+			c = s[0];
+			// When see X, we know exponent is at least 1
+			if (c == 'X' || c == 'x')
+				exponent = 1;
+			ss << c;
+			s.erase(0, 1);
+		}
+		try{
+			//Set the coefficient
+			coefficient = negMult * stoi(ss.str(), &sz);
+		}
+		
+		catch (exception e)
+		{
+			exponent = 1;
+			coefficient = negMult;
+
+		}
+	
+
+	
 
 	// Reset string stream
 	ss.str("");
 	c = s[0];
 
-	// Erase the ^
-	if (c == '^')s.erase(0, 1);
+	// Erase the ^ or X
+	if (c == 'X')
+		s.erase(0, 1);
+	
 	c = s[0];
 
+	if (c == '^')
+		s.erase(0, 1);
+	c = s[0];
 	// look for additional - or + with exponet
 	if(!(s.find('-') == string::npos && s.find('+') == string::npos))
 	{
@@ -72,7 +92,7 @@ Term::Term(string s)
 	}
 
 	// Set exponet if something is left in the string
-	else if (s != "")
+	else if (s != "" && s != "X" && s!= "x")
 	{
 		ss.str(s);
 		exponent = stoi(ss.str(), &sz);
