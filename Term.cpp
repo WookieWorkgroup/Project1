@@ -36,30 +36,43 @@ Term::Term(string s)
 	}
 
 	c = s[0];
+	
+		// Put the coef into the string streams
+		while (c != 'X' && s != "")
+		{
 
-	// Put the coef into the string streams
-	while (c != 'X' && isdigit(c) && s != "")
-	{
+			c = s[0];
+			// When see X, we know exponent is at least 1
+			if (c == 'X' || c == 'x')
+				exponent = 1;
+			ss << c;
+			s.erase(0, 1);
+		}
+		try{
+			//Set the coefficient
+			coefficient = negMult * stoi(ss.str(), &sz);
+		}
 		
-		c = s[0];
-		// We know exponent is at least 1
-		if (c == 'X' || c == 'x')
+		catch (exception e)
+		{
 			exponent = 1;
-		ss << c;
-		s.erase(0, 1);
-	}
+			coefficient = negMult;
 
-	//Set the coefficient
-	coefficient = negMult * stoi(ss.str(), &sz);
-
+		}
+	
 	// Reset string stream
 	ss.str("");
 	c = s[0];
 
-	// Erase the ^
-	if (c == '^')s.erase(0, 1);
+	// Erase the ^ or X
+	if (c == 'X')
+		s.erase(0, 1);
 	c = s[0];
 
+	if (c == '^')
+		s.erase(0, 1);
+	c = s[0];
+	
 	// look for additional - or + with exponet
 	if(!(s.find('-') == string::npos && s.find('+') == string::npos))
 	{
@@ -72,7 +85,7 @@ Term::Term(string s)
 	}
 
 	// Set exponet if something is left in the string
-	else if (s != "")
+	else if (s != "" && s != "X" && s!= "x")
 	{
 		ss.str(s);
 		exponent = stoi(ss.str(), &sz);
@@ -156,12 +169,16 @@ istream& operator>>(istream& is, Term& t)
 	return is;
 }
 
+
+// Addition of two terms by adding coeffecients
 Term operator +(const Term&lhs, const Term&rhs)
 {
 	//Assumes exponents are checked to be the same before this function is called.
 	return Term(lhs.coefficient + rhs.coefficient, rhs.exponent);
 }
 
+
+// Reverse overload to allow for sorting with largest exponet term first
 bool Term::operator > (Term &rhs)
 {
 	return exponent < rhs.exponent;
@@ -178,6 +195,8 @@ bool Term::operator <= (Term &rhs)
 {
 	return exponent >= rhs.exponent;
 }
+
+// Compare equality of individual term (used in addition of two polys)
 bool Term::operator == (Term &rhs)
 {
 	return exponent == rhs.exponent;

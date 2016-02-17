@@ -42,18 +42,18 @@ int main()
 // A glorious menu and user interface
 void displayMenu(Polynomial& p1, Polynomial& p2, Polynomial& result)
 {
-	
-
 	// My choices
 	int userSelection(-1);
+	cout << "\n\n\n\n";
 	cout << "Please select one: \n\n";
 	cout << "1:\tEnter Polynomial One\n";
 	cout << "2:\tEnter Polynomial Two\n";
 	cout << "3:\tAdd Polynomials\n";
 	cout << "4:\tDisplay Polynomial One\n";
 	cout << "5:\tDisplay Polynomial Two\n";
-	cout << "6:\tClear entries\n";
-	cout << "7:\tExit\n\n";
+	cout << "6:\tDisplay Result\n";
+	cout << "7:\tClear entries\n";
+	cout << "8:\tExit\n\n";
 	cin >> userSelection;
 	
 	// What happens when making a choice
@@ -61,6 +61,7 @@ void displayMenu(Polynomial& p1, Polynomial& p2, Polynomial& result)
 	{
 	// Give me poly1
 	case 1:
+		cout << endl << endl;
 		cout << "Enter the first polynomial: ";
 		try{
 			getPolynomial(p1);
@@ -75,6 +76,7 @@ void displayMenu(Polynomial& p1, Polynomial& p2, Polynomial& result)
 
 	// Give me poly2
 	case 2:
+		cout << endl << endl;
 		cout << "Enter the second polynomial: ";
 		try{
 			getPolynomial(p2);
@@ -89,6 +91,7 @@ void displayMenu(Polynomial& p1, Polynomial& p2, Polynomial& result)
 	
 	// Add the polys
 	case 3:
+		cout << endl << endl;
 		if (p1.is_empty()) cout << "Polynomial One is empty, please enter a value before you add\n";
 		if (p2.is_empty()) cout << "Polynomial Two is empty, please enter a value before you add\n";
 		else
@@ -100,31 +103,44 @@ void displayMenu(Polynomial& p1, Polynomial& p2, Polynomial& result)
 
 	// Show what user entered for poly1
 	case 4:
+		cout << endl << endl;
 		if (p1.is_empty()) cout << "Polynomial One is empty, please enter a value before you add\n";
 		else cout << "Polynomial one is " << p1 << endl;
+			
 		break;
 
 	// Show what user entered for poly2
 	case 5:
+		cout << endl << endl;
 		if (p2.is_empty()) cout << "Polynomial Two is empty, please enter a value before you add\n";
 		else cout << "Polynomial two is " << p2 << endl;
 		break;
 
-	// Reset all polys
+		// Show what user entered for poly2
 	case 6:
+		cout << endl << endl;
+		if (result.is_empty()) cout << "No result found, please add some polynomials together\n";
+		else cout << "Result of the last addition was " << result << endl;
+		break;
+
+	// Reset all polys
+	case 7:
 		p1.clear();
 		p2.clear();
 		result.clear();
+		cout << endl << endl;
 		cout << "Entries cleared\n\n";
 		break;
 
 	// Bah bye
-	case 7:
+	case 8:
 		exit(0);
 
 	// Bad choice, try that again
 	default:
-		cout << "Invalid menu option\n\n";
+		cout << endl << endl;
+		cout << "Invalid menu option" << endl;
+		break;
 	}
 }
 
