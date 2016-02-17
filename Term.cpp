@@ -7,7 +7,6 @@ Term::Term(int c, int e)
 	exponent = e;
 }
 
-
 // Copy Constructor
 Term::Term(const Term &rhs)
 {
@@ -15,12 +14,12 @@ Term::Term(const Term &rhs)
 	exponent = rhs.exponent;
 }
 
-
-// Take a string and extract coef and exponet
+// Take a string and extract coef and exponent
 Term::Term(string s)
 {
 	exponent = 0;
 	coefficient = 0;
+
 	// Variable for neg or pos term
 	int negMult(1);
 
@@ -29,11 +28,8 @@ Term::Term(string s)
 	char c;
 	string::size_type sz;
 
-	// Remove the + symbol
-	if (s[0] == '+')s.erase(0,1);
-
-	// If find -, remove and make term coef negative
-	else if (s[0] == '-')
+	// If find -, remove and make term coeff negative
+	if (s[0] == '-')
 	{
 		s.erase(0, 1);
 		negMult = -1;
@@ -46,27 +42,22 @@ Term::Term(string s)
 	{
 		
 		c = s[0];
-		// We know exponet is at least 1
+		// We know exponent is at least 1
 		if (c == 'X' || c == 'x')
 			exponent = 1;
 		ss << c;
 		s.erase(0, 1);
-		
 	}
 
-	// Set the coef
-	if (c != 'X')
-		coefficient = negMult * stoi(ss.str(), &sz);
-	else
-		coefficient = 1;
+	//Set the coefficient
+	coefficient = negMult * stoi(ss.str(), &sz);
 
 	// Reset string stream
 	ss.str("");
 	c = s[0];
 
 	// Erase the ^
-	if (c == '^')
-		s.erase(0, 1);
+	if (c == '^')s.erase(0, 1);
 	c = s[0];
 
 	// look for additional - or + with exponet
