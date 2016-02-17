@@ -40,7 +40,7 @@ Term::Term(string s)
 	// Put the coef into the string streams
 	while (c != 'X' && isdigit(c) && s != "")
 	{
-
+		
 		c = s[0];
 		// We know exponent is at least 1
 		if (c == 'X' || c == 'x')
@@ -61,7 +61,7 @@ Term::Term(string s)
 	c = s[0];
 
 	// look for additional - or + with exponet
-	if (!(s.find('-') == string::npos && s.find('+') == string::npos))
+	if(!(s.find('-') == string::npos && s.find('+') == string::npos))
 	{
 		while (c != '+' && c != '-' && c != '\n')
 		{
@@ -105,7 +105,7 @@ istream& operator>>(istream& is, Term& t)
 {
 	int negMult(1), coeff(0), exp(0);
 	stringstream ss;
-
+	
 	char c = is.get();
 
 
@@ -135,22 +135,22 @@ istream& operator>>(istream& is, Term& t)
 
 		c = is.get(); //toss X
 		c = is.get(); //toss ^
-
+				
 		//clear the input from the coefficient
-		ss.str(string());
+		ss.str(string()); 
 
 		//iterate until the end of the line or the next term
-		while (c != '+' && c != '-' && c != '\n')
+		while (c != '+' && c != '-' && c != '\n') 
 		{
 			ss << c;
 			c = is.get();
 		}
-
+		
 		//turn our string into an int
 		exp = stoi(ss.str(), &sz);
 
 		//modify the Term values
-		t.coefficient = coeff;
+		t.coefficient = coeff; 
 		t.exponent = exp;
 	}
 	return is;

@@ -6,10 +6,6 @@ Polynomial::Polynomial()
 	
 }
 
-
-
-
-
 // Clear the polynomial
 void Polynomial::clear()
 {
@@ -27,7 +23,16 @@ bool Polynomial::is_empty()
 // Add a new term to the list in sorted order
 void Polynomial::addTerm(Term t)
 {
-	terms.push_back(t);
+	bool found(false);
+	for (list<Term>::iterator itr = terms.begin(); itr != terms.end(); ++itr)
+	{
+		if (t == *itr)
+		{
+			*itr = t + *itr;
+			found = true;
+		}
+	}
+	if (!found)terms.push_back(t);
 	terms.sort();
 }
 
@@ -76,6 +81,7 @@ Polynomial operator +(Polynomial& lhs, Polynomial& rhs)
 		sum.terms.push_back(*itr2);
 		++itr2;
 	}
+	sum.terms.sort();
 	return sum;
 }
 
@@ -88,10 +94,8 @@ ostream& operator<<(ostream& os, const Polynomial& P)
 	++itr;
 	while (itr != P.terms.end())
 	{
-		if (itr->ispositive())
-			os << '+' << *itr;
-		else if (itr->ispositive())
-			os << *itr;
+		if (itr->ispositive()) os << "+";
+		os << *itr;
 		++itr;
 	}
 	return os;
