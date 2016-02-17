@@ -36,10 +36,6 @@ Term::Term(string s)
 	}
 
 	c = s[0];
-
-	// When no number coef before X
-	
-		
 	
 		// Put the coef into the string streams
 		while (c != 'X' && s != "")
@@ -64,9 +60,6 @@ Term::Term(string s)
 
 		}
 	
-
-	
-
 	// Reset string stream
 	ss.str("");
 	c = s[0];
@@ -74,12 +67,12 @@ Term::Term(string s)
 	// Erase the ^ or X
 	if (c == 'X')
 		s.erase(0, 1);
-	
 	c = s[0];
 
 	if (c == '^')
 		s.erase(0, 1);
 	c = s[0];
+	
 	// look for additional - or + with exponet
 	if(!(s.find('-') == string::npos && s.find('+') == string::npos))
 	{
@@ -176,12 +169,16 @@ istream& operator>>(istream& is, Term& t)
 	return is;
 }
 
+
+// Addition of two terms by adding coeffecients
 Term operator +(const Term&lhs, const Term&rhs)
 {
 	//Assumes exponents are checked to be the same before this function is called.
 	return Term(lhs.coefficient + rhs.coefficient, rhs.exponent);
 }
 
+
+// Reverse overload to allow for sorting with largest exponet term first
 bool Term::operator > (Term &rhs)
 {
 	return exponent < rhs.exponent;
@@ -198,6 +195,8 @@ bool Term::operator <= (Term &rhs)
 {
 	return exponent >= rhs.exponent;
 }
+
+// Compare equality of individual term (used in addition of two polys)
 bool Term::operator == (Term &rhs)
 {
 	return exponent == rhs.exponent;

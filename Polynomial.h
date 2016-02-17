@@ -12,11 +12,8 @@ public:
 	Polynomial();
 
 	// Functions to edit polynomials (sort, clear, empty)
-	//void sort();
 	void clear();
 	bool is_empty();
-
-
 
 	// Add the polynomials
 	void addTerm(Term t);
