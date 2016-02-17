@@ -3,31 +3,11 @@
 
 Polynomial::Polynomial()
 {
-	/*Term temp;
-	while (cin >> temp)
-	{
-	terms.push_back(temp);
-	}
-	sort();*/
+	
 }
 
 
-// Sort polynomial and combine terms
-/*void Polynomial::sort()
-{
-	list<Term>::iterator head = terms.begin();
-	while (head != terms.end())
-	{
-		Term smallest = *head;
-		for (list<Term>::iterator itr = terms.begin(); itr != terms.end(); ++itr)
-		{
-			if (smallest > *itr)
-				smallest = *itr;
-		}
-		swap(smallest, *head);
-		++head;
-	}
-}*/
+
 
 
 // Clear the polynomial

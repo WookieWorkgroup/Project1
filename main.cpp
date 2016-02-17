@@ -61,14 +61,28 @@ void displayMenu(Polynomial& p1, Polynomial& p2, Polynomial& result)
 	// Give me poly1
 	case 1:
 		cout << "Enter the first polynomial: ";
-		getPolynomial(p1);
+		try{
+			getPolynomial(p1);
+		}
+		catch (exception e)
+		{
+			cout << endl << endl;
+			cout << "Incorrect polynomial formatting entered, use formatting like 3X^3+1" << endl;
+		}
 		cout << endl << endl;
 		break;
 
 	// Give me poly2
 	case 2:
 		cout << "Enter the second polynomial: ";
-		getPolynomial(p2);
+		try{
+			getPolynomial(p2);
+		}
+		catch (exception e)
+		{
+			cout << endl << endl;
+			cout << "Incorrect polynomial formatting entered, use formatting like 3X^3+1" << endl;
+		}
 		cout << endl << endl;
 		break;
 	

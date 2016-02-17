@@ -19,6 +19,8 @@ Term::Term(const Term &rhs)
 // Take a string and extract coef and exponet
 Term::Term(string s)
 {
+	exponent = 0;
+	coefficient = 0;
 	// Variable for neg or pos term
 	int negMult(1);
 
@@ -39,8 +41,8 @@ Term::Term(string s)
 
 	c = s[0];
 
-	// Remove the X
-	while (c != 'X' && s != "")
+	// Put the coef into the string streams
+	while (c != 'X' && isdigit(c) && s != "")
 	{
 		
 		c = s[0];
@@ -53,7 +55,10 @@ Term::Term(string s)
 	}
 
 	// Set the coef
-	coefficient = negMult * stoi(ss.str(), &sz);
+	if (c != 'X')
+		coefficient = negMult * stoi(ss.str(), &sz);
+	else
+		coefficient = 1;
 
 	// Reset string stream
 	ss.str("");
@@ -83,12 +88,10 @@ Term::Term(string s)
 	}
 
 	// No exp so set as zero
-	else if (exponent != 1)
+	else if (exponent == 1)
+		return;
+	else
 		exponent = 0;
-
-		
-	
-
 }
 
 void Term::operator =(const Term &rhs)
