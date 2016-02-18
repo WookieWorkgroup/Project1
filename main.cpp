@@ -53,7 +53,13 @@ void displayMenu(Polynomial& p1, Polynomial& p2, Polynomial& result)
 	cout << "6:\tDisplay Result\n";
 	cout << "7:\tClear entries\n";
 	cout << "8:\tExit\n\n";
-	cin >> userSelection;
+	while (!(cin >> userSelection))
+	{
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		cout << endl << "Single digits only" << endl;
+		cout << "Make another selection: ";
+	}
 	
 	// What happens when making a choice
 	switch (userSelection)
