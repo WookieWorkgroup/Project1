@@ -1,5 +1,6 @@
 /*********************************************
 
+Edited this just now
 Name:			Joshua Neustrom, jwnf7b@mail.umkc.edu, 10227835
 
 Course:			CS303
