@@ -42,9 +42,9 @@ int main()
 // A glorious menu and user interface
 void displayMenu(Polynomial& p1, Polynomial& p2, Polynomial& result)
 {
+	cout << string(100, '\n');
 	// My choices
 	int userSelection(-1);
-	cout << "\n\n\n\n";
 	cout << "Please select one: \n\n";
 	cout << "1:\tEnter Polynomial One\n";
 	cout << "2:\tEnter Polynomial Two\n";
@@ -71,6 +71,7 @@ void displayMenu(Polynomial& p1, Polynomial& p2, Polynomial& result)
 		cout << "Enter the first polynomial: ";
 		try{
 			getPolynomial(p1);
+			cout << "Polynomial one successfully entered\n";
 		}
 		catch (exception e)
 		{
@@ -78,6 +79,7 @@ void displayMenu(Polynomial& p1, Polynomial& p2, Polynomial& result)
 			cout << "Incorrect polynomial formatting entered, use formatting like 3X^3+1" << endl;
 		}
 		cout << endl << endl;
+		clearScreen();
 		break;
 
 	// Give me poly2
@@ -86,6 +88,7 @@ void displayMenu(Polynomial& p1, Polynomial& p2, Polynomial& result)
 		cout << "Enter the second polynomial: ";
 		try{
 			getPolynomial(p2);
+			cout << "Polynomial two successfully entered\n";
 		}
 		catch (exception e)
 		{
@@ -93,6 +96,7 @@ void displayMenu(Polynomial& p1, Polynomial& p2, Polynomial& result)
 			cout << "Incorrect polynomial formatting entered, use formatting like 3X^3+1" << endl;
 		}
 		cout << endl << endl;
+		clearScreen();
 		break;
 	
 	// Add the polys
@@ -105,6 +109,7 @@ void displayMenu(Polynomial& p1, Polynomial& p2, Polynomial& result)
 			result = p1 + p2;
 			cout << "The result is: " << result << endl;
 		}
+		clearScreen();
 		break;
 
 	// Show what user entered for poly1
@@ -112,7 +117,7 @@ void displayMenu(Polynomial& p1, Polynomial& p2, Polynomial& result)
 		cout << endl << endl;
 		if (p1.is_empty()) cout << "Polynomial One is empty, please enter a value before you add\n";
 		else cout << "Polynomial one is " << p1 << endl;
-			
+		clearScreen();
 		break;
 
 	// Show what user entered for poly2
@@ -120,6 +125,7 @@ void displayMenu(Polynomial& p1, Polynomial& p2, Polynomial& result)
 		cout << endl << endl;
 		if (p2.is_empty()) cout << "Polynomial Two is empty, please enter a value before you add\n";
 		else cout << "Polynomial two is " << p2 << endl;
+		clearScreen();
 		break;
 
 		// Show what user entered for poly2
@@ -127,6 +133,7 @@ void displayMenu(Polynomial& p1, Polynomial& p2, Polynomial& result)
 		cout << endl << endl;
 		if (result.is_empty()) cout << "No result found, please add some polynomials together\n";
 		else cout << "Result of the last addition was " << result << endl;
+		clearScreen();
 		break;
 
 	// Reset all polys
@@ -136,6 +143,7 @@ void displayMenu(Polynomial& p1, Polynomial& p2, Polynomial& result)
 		result.clear();
 		cout << endl << endl;
 		cout << "Entries cleared\n\n";
+		clearScreen();
 		break;
 
 	// Bah bye
@@ -146,6 +154,7 @@ void displayMenu(Polynomial& p1, Polynomial& p2, Polynomial& result)
 	default:
 		cout << endl << endl;
 		cout << "Invalid menu option" << endl;
+		clearScreen();
 		break;
 	}
 }
@@ -205,6 +214,7 @@ Polynomial getPolynomial(Polynomial& p)
 // Clear what the user sees on the screen
 void clearScreen()
 {
+	system("pause");
 	cout << string(100, '\n');
 }
 
