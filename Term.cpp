@@ -204,9 +204,17 @@ bool Term::operator == (Term &rhs)
 
 bool Term::ispositive()const
 {
-	if (coefficient>0)
-		return true;
-	else
-		return false;
-	return false;
+	if (coefficient > 0)return true;
+	else return false;
+}
+
+bool Term::isnegative()const
+{
+	if (coefficient < 0)return true;
+	else return false;
+}
+bool Term::iszero()const
+{
+	if (coefficient == 0)return true;
+	else return false;
 }

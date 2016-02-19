@@ -21,8 +21,10 @@ public:
 	void setCoefficient(int c){ coefficient = c; }
 	void setExponent(int e){ exponent = e; }
 
-	// Is it positive
+	// Is it positive/negative
 	bool ispositive()const;
+	bool isnegative()const;
+	bool iszero()const;
 
 	//Overloaded operators
 	void operator =(const Term &rhs);
