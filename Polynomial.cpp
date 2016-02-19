@@ -42,9 +42,17 @@ Polynomial operator +(Polynomial& lhs, Polynomial& rhs)
 {
 	// Result and iterators for each operand
 	Polynomial sum;
-	list<Term>::iterator itr1 = lhs.terms.begin();
-	list<Term>::iterator itr2 = rhs.terms.begin();
 
+	for (list<Term>::iterator itr1 = lhs.terms.begin(); itr1 != lhs.terms.end(); ++itr1)
+	{
+		sum.addTerm(*itr1);
+	}
+	for (list<Term>::iterator itr2 = rhs.terms.begin(); itr2 != rhs.terms.end(); ++itr2)
+	{
+		sum.addTerm(*itr2);
+	}
+
+	/*
 	// Go through and add terms
 	while (itr1 != lhs.terms.end() && itr2 != rhs.terms.end())
 	{
@@ -85,7 +93,7 @@ Polynomial operator +(Polynomial& lhs, Polynomial& rhs)
 	{
 		sum.terms.push_back(*itr2);
 		++itr2;
-	}
+	}*/
 
 	// Sort the result
 	sum.terms.sort();
@@ -99,14 +107,21 @@ Polynomial operator +(Polynomial& lhs, Polynomial& rhs)
 ostream& operator<<(ostream& os, const Polynomial& P)
 {
 	list<Term>::const_iterator itr = P.terms.begin();
-	os << *itr;
+	if (!itr->iszero())os << *itr;
 	++itr;
 
 	// Go through terms
 	while (itr != P.terms.end())
 	{
-		if (itr->ispositive()) os << "+";
-		os << *itr;
+		if (itr->ispositive())
+		{
+			os << "+";
+			os << *itr;
+		}
+		else if (itr->isnegative())
+		{
+			os << *itr;
+		}
 		++itr;
 	}
 
