@@ -17,11 +17,12 @@ Term::Term(const Term &rhs)
 // Take a string and extract coef and exponent
 Term::Term(string s)
 {
-	exponent = 0;
-	coefficient = 0;
-
 	// Variable for neg or pos term
 	int negMult(1);
+
+	// Initial term values
+	exponent = 0;
+	coefficient = 0;
 
 	// String variables for reading user entered string
 	stringstream ss;
@@ -37,41 +38,40 @@ Term::Term(string s)
 
 	c = s[0];
 	
-		// Put the coef into the string streams
-		while (c != 'X' && s != "")
-		{
-
-			c = s[0];
-			// When see X, we know exponent is at least 1
-			if (c == 'X' || c == 'x')
-				exponent = 1;
-			ss << c;
-			s.erase(0, 1);
-		}
-		try{
-			//Set the coefficient
-			coefficient = negMult * stoi(ss.str(), &sz);
-		}
-		
-		catch (exception e)
-		{
+	// Put the coef into the string streams
+	while (c != '^' && s != "")
+	{
+		c = s[0];
+		// When see X, we know exponent is at least 1
+		if (c == 'X' || c == 'x')
 			exponent = 1;
-			coefficient = negMult;
-
-		}
+		ss << c;
+		s.erase(0, 1);
+	}
+	// Set a coef
+	try{
+		coefficient = negMult * stoi(ss.str(), &sz);
+	}
+	
+	// Failed so is a -X
+	catch (exception e)
+	{
+		exponent = 1;
+		coefficient = negMult;
+	}
 	
 	// Reset string stream
 	ss.str("");
 	c = s[0];
 
-	// Erase the ^ or X
-	if (c == 'X')
-		s.erase(0, 1);
-	c = s[0];
+	//// Erase the ^ or X
+	//if (c == 'X')
+	//	s.erase(0, 1);
+	//c = s[0];
 
-	if (c == '^')
-		s.erase(0, 1);
-	c = s[0];
+	//if (c == '^')
+	//	s.erase(0, 1);
+	//c = s[0];
 	
 	// look for additional - or + with exponet
 	if(!(s.find('-') == string::npos && s.find('+') == string::npos))
@@ -84,16 +84,18 @@ Term::Term(string s)
 		}
 	}
 
-	// Set exponet if something is left in the string
-	else if (s != "" && s != "X" && s!= "x")
+	// Case where set number after X^ as the exponet
+	else if (s != "")
 	{
 		ss.str(s);
 		exponent = stoi(ss.str(), &sz);
 	}
 
-	// No exp so set as zero
+	// Case where term was X with no exponet
 	else if (exponent == 1)
 		return;
+
+	// Case where only a ceof and no X
 	else
 		exponent = 0;
 }

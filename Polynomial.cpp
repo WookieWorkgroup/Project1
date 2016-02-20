@@ -23,7 +23,10 @@ bool Polynomial::is_empty()
 // Add a new term to the list in sorted order
 void Polynomial::addTerm(Term t)
 {
+	// Is the term there already
 	bool found(false);
+
+	// Add the term to the result
 	for (list<Term>::iterator itr = terms.begin(); itr != terms.end(); ++itr)
 	{
 		if (t == *itr)
@@ -32,7 +35,11 @@ void Polynomial::addTerm(Term t)
 			found = true;
 		}
 	}
+
+	// Push result onto the poly
 	if (!found)terms.push_back(t);
+
+	// Sort
 	terms.sort();
 }
 
@@ -43,6 +50,7 @@ Polynomial operator +(Polynomial& lhs, Polynomial& rhs)
 	// Result and iterators for each operand
 	Polynomial sum;
 
+	// Go through poly and add each term
 	for (list<Term>::iterator itr1 = lhs.terms.begin(); itr1 != lhs.terms.end(); ++itr1)
 	{
 		sum.addTerm(*itr1);
@@ -51,49 +59,6 @@ Polynomial operator +(Polynomial& lhs, Polynomial& rhs)
 	{
 		sum.addTerm(*itr2);
 	}
-
-	/*
-	// Go through and add terms
-	while (itr1 != lhs.terms.end() && itr2 != rhs.terms.end())
-	{
-		
-		// Add terms of same exponet
-		if (*itr1 == *itr2)
-		{
-			sum.terms.push_back(*itr1 + *itr2);
-			++itr1;
-			++itr2;
-		}
-			
-
-		// If exponet in lhs term is greater, add term to list
-		else if (*itr1 > *itr2)
-		{
-			sum.terms.push_back(*itr1);
-			++itr1;
-		}
-
-		// If exponet in rhs term is greater, add term to list
-		else
-		{
-			sum.terms.push_back(*itr2);
-			++itr2;
-		}
-	}
-
-	// and the remainder of the lhs
-	if (itr1 != lhs.terms.end() && itr2 == rhs.terms.end())
-	{
-		sum.terms.push_back(*itr1);
-		++itr1;
-	}
-
-	// add the remainder of the rhs
-	else if (itr1 == lhs.terms.end() && itr2 != rhs.terms.end())
-	{
-		sum.terms.push_back(*itr2);
-		++itr2;
-	}*/
 
 	// Sort the result
 	sum.terms.sort();
