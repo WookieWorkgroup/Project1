@@ -108,12 +108,24 @@ void Term::operator =(const Term &rhs)
 
 ostream& operator<<(ostream& os, const Term& t)
 {
-	if (t.exponent > 1)
-		os << t.coefficient << "X^" << t.exponent;
-	else if (t.exponent == 1)
-		os << t.coefficient << "X";
+	if (t.coefficient == 1)
+	{
+		if (t.exponent > 1)
+			os <<  "X^" << t.exponent;
+		else if (t.exponent == 1)
+			os << "X";
+		else
+			os << t.coefficient;
+	}
 	else
-		os << t.coefficient;
+	{
+		if (t.exponent > 1)
+			os << t.coefficient << "X^" << t.exponent;
+		else if (t.exponent == 1)
+			os << t.coefficient << "X";
+		else
+			os << t.coefficient;
+	}
 	return os;
 }
 istream& operator>>(istream& is, Term& t)
