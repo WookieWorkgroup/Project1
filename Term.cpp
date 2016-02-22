@@ -108,6 +108,7 @@ void Term::operator =(const Term &rhs)
 
 ostream& operator<<(ostream& os, const Term& t)
 {
+	//make sure that if the coefficient is 1 or -1, it just show the X with exponent
 	if (t.coefficient == 1)
 	{
 		if (t.exponent > 1)

@@ -71,6 +71,8 @@ Polynomial operator +(Polynomial& lhs, Polynomial& rhs)
 // Output a list of polys by seperating positive terms with a +
 ostream& operator<<(ostream& os, const Polynomial& P)
 {
+	//make sure if the sum polymial is 0, it will display the answer 0
+	//and if there are some 0s at the front of the polynomial, it won't display
 	list<Term>::const_iterator itr = P.terms.begin();
 	while (itr->iszero() && itr != P.terms.end())
 		itr++;
