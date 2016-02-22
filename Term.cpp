@@ -111,9 +111,18 @@ ostream& operator<<(ostream& os, const Term& t)
 	if (t.coefficient == 1)
 	{
 		if (t.exponent > 1)
-			os <<  "X^" << t.exponent;
+			os << "X^" << t.exponent;
 		else if (t.exponent == 1)
 			os << "X";
+		else
+			os << t.coefficient;
+	}
+	else if (t.coefficient == -1)
+	{
+		if (t.exponent > 1)
+			os << '-' << "X^" << t.exponent;
+		else if (t.exponent == 1)
+			os << '-' << "X";
 		else
 			os << t.coefficient;
 	}

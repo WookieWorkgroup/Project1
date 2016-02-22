@@ -72,24 +72,30 @@ Polynomial operator +(Polynomial& lhs, Polynomial& rhs)
 ostream& operator<<(ostream& os, const Polynomial& P)
 {
 	list<Term>::const_iterator itr = P.terms.begin();
-	if (!itr->iszero())os << *itr;
-	++itr;
-
-	// Go through terms
-	while (itr != P.terms.end())
+	while (itr->iszero() && itr != P.terms.end())
+		itr++;
+	if (itr == P.terms.end())
+		os << '0';
+	else
 	{
-		if (itr->ispositive())
-		{
-			os << "+";
-			os << *itr;
-		}
-		else if (itr->isnegative())
-		{
-			os << *itr;
-		}
+		os << *itr;
 		++itr;
-	}
 
+		// Go through terms
+		while (itr != P.terms.end())
+		{
+			if (itr->ispositive())
+			{
+				os << "+";
+				os << *itr;
+			}
+			else if (itr->isnegative())
+			{
+				os << *itr;
+			}
+			++itr;
+		}
+	}
 	// Bye
 	return os;
 }
