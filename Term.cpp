@@ -226,17 +226,24 @@ bool Term::operator == (Term &rhs)
 	return exponent == rhs.exponent;
 }
 
+
+// True if coefficient is positive
 bool Term::ispositive()const
 {
 	if (coefficient > 0)return true;
 	else return false;
 }
 
+
+// True if coefficient is negative
 bool Term::isnegative()const
 {
 	if (coefficient < 0)return true;
 	else return false;
 }
+
+
+// True if coefficient is zero
 bool Term::iszero()const
 {
 	if (coefficient == 0)return true;

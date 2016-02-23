@@ -38,6 +38,7 @@ int main()
 	}
 }
 
+
 // A glorious menu and user interface
 void displayMenu(Polynomial& p1, Polynomial& p2, Polynomial& result)
 {
@@ -52,10 +53,14 @@ void displayMenu(Polynomial& p1, Polynomial& p2, Polynomial& result)
 	cout << "6:\tDisplay Result\n";
 	cout << "7:\tClear entries\n";
 	cout << "8:\tExit\n\n";
+
+	// Filter input so program accepts single digits only
 	while (!(cin >> userSelection))
 	{
 		cin.clear();
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+		// Warn the user about an improper input
 		cout << endl << "Single digits only" << endl;
 		cout << "Make another selection: ";
 	}
@@ -67,15 +72,20 @@ void displayMenu(Polynomial& p1, Polynomial& p2, Polynomial& result)
 	case 1:
 		cout << endl << endl;
 		cout << "Enter the first polynomial: ";
+
+		// See if the polynomial is poperly entered
 		try{
 			getPolynomial(p1);
 			cout << "Polynomial one successfully entered\n";
 		}
+
+		// Bad input, try again
 		catch (exception e)
 		{
 			cout << endl << endl;
 			cout << "Incorrect polynomial formatting entered, use formatting like 3X^3+1" << endl;
 		}
+
 		cout << endl << endl;
 		break;
 
@@ -83,10 +93,14 @@ void displayMenu(Polynomial& p1, Polynomial& p2, Polynomial& result)
 	case 2:
 		cout << endl << endl;
 		cout << "Enter the second polynomial: ";
+
+		// See if the polynomial is poperly entered
 		try{
 			getPolynomial(p2);
 			cout << "Polynomial two successfully entered\n";
 		}
+
+		// Try again
 		catch (exception e)
 		{
 			cout << endl << endl;
