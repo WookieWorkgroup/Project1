@@ -169,7 +169,7 @@ Polynomial getPolynomial(Polynomial& p)
 	cin.ignore();
 	getline(cin, line);
 
-	// Put + in front of any - as a delimeter for terms in a poly
+	// Put + in front of any - as a delimiter for terms in a poly
 	int stringSearchPosition(0);
 	while (line.find('-', stringSearchPosition) != string::npos)
 	{
